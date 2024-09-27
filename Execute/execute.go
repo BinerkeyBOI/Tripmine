@@ -10,12 +10,18 @@ import (
 var expectingByte byte
 var waitingByte byte
 var contents []byte
+var floop xtrafor.Loop
 
 func iteration(i int) {
-	t, s := decode(contents[i])
+	if contents[i] != expectingByte && expectingByte != 0x00 {
+		panic(fmt.Errorf("CorruptionError: Expected: " + string(expectingByte) + "Got: " + string(contents[i])))
+	}
+
+	t, _ := decode(contents[i])
 	switch t {
 	case 1:
-
+		expectingByte = 0xff
+		floop.Step()
 	}
 }
 
@@ -25,7 +31,7 @@ func main() {
 	flag.Parse()
 	tg := flag.Arg(0)
 	contents, err = os.ReadFile(tg)
-	floop := xtrafor.Loop(0, false, iteration)
+	floop.ChangeAttributes(0, false, iteration)
 	if err != nil {
 		panic(err)
 	}

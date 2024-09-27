@@ -1,28 +1,25 @@
 package xtrafor
 
-type loop struct {
+type Loop struct {
 	i      int
 	paused bool
 	call   func(i int)
 }
 
-func (l *loop) Step() {
+func (l *Loop) Step() {
 	if !(l.paused) {
 		l.call(l.i)
 		l.i += 1
 	}
 }
 
-func (l *loop) Jump(o int) {
+func (l *Loop) Jump(o int) {
 	l.i = o
 	l.call(l.i)
 }
 
-func Loop(i int, paused bool, call func(i int)) loop {
-	l := loop{
-		i:      i,
-		paused: paused,
-		call:   call,
-	}
-	return l
+func (l *Loop) ChangeAttributes(i int, p bool, call func(i int)) {
+	l.i = i
+	l.paused = p
+	l.call = call
 }
