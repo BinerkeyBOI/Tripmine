@@ -2,23 +2,29 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"os"
 	xtrafor "xtraFor/xtraFor"
 )
 
 var expectingByte byte
-var contents byte[]
+var waitingByte byte
+var contents []byte
 
 func iteration(i int) {
-	switch decode(contents[i]) {
-		
+	t, s := decode(contents[i])
+	switch t {
+	case 1:
+
 	}
 }
 
 func main() {
+	err := fmt.Errorf("None")
+	err = nil
 	flag.Parse()
 	tg := flag.Arg(0)
-	contents, err := os.ReadFile(tg)
+	contents, err = os.ReadFile(tg)
 	floop := xtrafor.Loop(0, false, iteration)
 	if err != nil {
 		panic(err)
