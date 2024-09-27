@@ -2,13 +2,17 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"os"
 	xtrafor "xtraFor/xtraFor"
 )
 
-func iteration(i int) {
+var expectingByte byte
+var contents byte[]
 
+func iteration(i int) {
+	switch decode(contents[i]) {
+		
+	}
 }
 
 func main() {
@@ -19,7 +23,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(contents)
+	floop.Step()
 }
 
 func decode(b byte) (int, int) {
