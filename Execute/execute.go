@@ -11,6 +11,7 @@ var expectingByte byte
 var waitingByte byte
 var contents []byte
 var floop xtrafor.Loop
+var path = "/"
 
 func iteration(i int) {
 	if contents[i] != expectingByte && expectingByte != 0x00 {
